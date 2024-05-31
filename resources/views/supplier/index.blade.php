@@ -55,6 +55,8 @@
 
                 <i class="fa fa-plus" aria-hidden="true"></i> Add New
               </a>
+              <a class="btn btn-success btn-sm" style="background-color: blue"
+                href="{{ URL::to('suppliers/export') }}">Export to Excel</a>
 
               <br />
               <br />
