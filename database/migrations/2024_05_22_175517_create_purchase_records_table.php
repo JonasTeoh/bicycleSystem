@@ -18,6 +18,10 @@ return new class extends Migration {
       // $table->foreignId('item_id');
       $table->timestamps();
     });
+
+    Schema::table('purchase_records', function (Blueprint $table) {
+      $table->decimal('sold_price', 10, 2)->nullable();
+    });
   }
 
   /**

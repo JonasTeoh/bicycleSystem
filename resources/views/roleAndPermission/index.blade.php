@@ -48,6 +48,13 @@
                 {{ session('success') }}
               </div>
             @endif
+            @if (session()->has('errors'))
+              <div class="alert alert-danger">
+                @foreach (session()->get('errors')->all() as $error)
+                  {{ $error }}
+                @endforeach
+              </div>
+            @endif
 
             <div class="card-header">Roles Info</div>
             <div class="card-body">
@@ -91,6 +98,8 @@
                                 <i class="fa fa-eye" aria-hidden="true"></i> View
                               </button>
                             </a>
+
+                            @if ($item->id != 1)
                             <a href="{{ url('/roleAndPermission/' . $item->id . '/edit') }}" title="Edit Role"
                               class="mr-2">
                               <button class="btn btn-primary btn-sm">
@@ -106,6 +115,7 @@
                                 onclick="return confirm('Confirm delete?')">
                                 <i class="fa fa-trash-o" aria-hidden="true"></i> Delete
                               </button>
+                            @endif
                             </form>
                           </div>
                         </td>

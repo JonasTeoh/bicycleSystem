@@ -29,7 +29,12 @@ class PurchaseRecordController extends Controller
   public function store(Request $request)
   {
     $inventoryItem = Inventory::find($request->item_id);
-    $inventoryItem->quantity -= $request->quantity;
+    if ($inventoryItem->quantity >= $request->quantity) {
+      $inventoryItem->quantity -= $request->quantity;
+    } else {
+      // Handle insufficient inventory scenario (throw exception, log error, etc.)
+      return redirect()->back()->withErrors(['quantity' => 'Insufficient inventory for this item.']);
+    }
     $inventoryItem->save();
     $input = $request->all();
     PurchaseRecord::create($input);
@@ -77,9 +82,10 @@ class PurchaseRecordController extends Controller
     $inventoryItem = Inventory::find($purchaseRecord->item_id);
     $quantityChange = $purchaseRecord->quantity - $purchaseRecordOriQuantity;
 
-    if ($quantityChange > 0) {
-      $inventoryItem->quantity += $quantityChange;
-    } else if ($quantityChange < 0) {
+    //the quantity decreased
+    if ($quantityChange < 0) {
+      $inventoryItem->quantity += abs($quantityChange);
+    } else if ($quantityChange > 0) { //quantity increased
       if ($inventoryItem->quantity >= abs($quantityChange)) {
         $inventoryItem->quantity -= abs($quantityChange);
       } else {

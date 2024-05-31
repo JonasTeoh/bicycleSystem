@@ -25,7 +25,7 @@
         <h3>Purchased Date: {{ $purchaseRecord->purchase_date }}</h3>
       </td>
       <td class="w-half">
-        <h3>Invoice Date: {{ $purchaseRecord->created_at }}</h3>
+        <h3>Invoice Date: @if ($currentTime = Carbon\Carbon::now('Asia/Shanghai')->format('Y-m-d H:i:s')) @endif {{ $currentTime }}</h3>
       </td>
   </table>
 
@@ -78,17 +78,17 @@
           {{ $purchaseRecord->quantity }}
         </td>
         <td>
-          {{ $purchaseRecord->inventory->price }}
+          {{ $purchaseRecord->sold_price }}
         </td>
         <td>
-          {{ number_format($purchaseRecord->inventory->price * $purchaseRecord->quantity, 2) }}
+          {{ number_format($purchaseRecord->sold_price * $purchaseRecord->quantity, 2) }}
         </td>
       </tr>
     </table>
   </div>
 
   <div class="total">
-    Total: RM {{ number_format($purchaseRecord->inventory->price * $purchaseRecord->quantity, 2) }}
+    Total: RM {{ number_format($purchaseRecord->sold_price * $purchaseRecord->quantity, 2) }}
   </div>
 
   <div class="footer margin-top">

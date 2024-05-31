@@ -15,10 +15,16 @@ Route::get('/', function () {
 });
 
 Route::get('/login', function () {
+  if (auth()->check()) {
+    return redirect('/home');
+  }
     return view('auth/login');
 });
 
 Route::get('/register', function () {
+  if (auth()->check()) {
+    return redirect('/home');
+  }
     return view('auth/register');
 })->name('register');
 

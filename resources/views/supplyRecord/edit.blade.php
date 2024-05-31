@@ -73,18 +73,18 @@
               value="{{ $supplyRecord->inventory->name }}"><br>
 
             <label>Quantity</label><br>
-            <input type="number" required name="quantity" id="quantity" class="form-control"
+            <input type="number" min="0" required name="quantity" id="quantity" class="form-control"
               onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57"
               value="{{ $supplyRecord->quantity }}" onchange="displayTotalPriceFromQuantity(this)"><br>
 
             <label>Supplier Unit Price (RM)</label><br>
-            <input type="number" required name="supplier_price" id="supplier_price" step=".01" class="form-control"
+            <input type="number" min="0" required name="supplier_price" id="supplier_price" step=".01" class="form-control"
               placeholder=0.00
               onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : (event.charCode >= 48 && event.charCode <= 57 || event.charCode == 46"
               onchange="displayTotalPrice(this)" value="{{ $supplyRecord->supplier_price }}"><br>
 
             <label>Supplier Total Price (RM)</label><br>
-            <input type="number" disabled required name="supplier_total_price" id="supplier_total_price" step=".01"
+            <input type="number" min="0" disabled required name="supplier_total_price" id="supplier_total_price" step=".01"
               class="form-control" placeholder="0.00" value=""><br>
 
             <label>Supplier ID</label><br>

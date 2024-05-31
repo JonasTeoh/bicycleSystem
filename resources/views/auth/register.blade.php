@@ -13,14 +13,14 @@
 
 
         <!-- Sign up form -->
-        <section class="signup">
+        <section class="signup" style="margin-bottom: 0">
             <div class="container" style="font-family:verdana;">
                 <div class="signup-content">
                     <div class="signup-form">
                         <h2 style="font-family:verdana" class="form-title">Register</h2>
                         <form method="POST" action="/register" class="register-form">
                             @csrf
-                            <div class="form-group">
+                            <div class="form-group" style="margin-bottom: 0">
                                 <label for="name"><i class="zmdi zmdi-account material-icons-name"></i></label>
                                 <input style="font-family:verdana" type="text" id="name" placeholder="Your Name"
                                     class="form-control @error('name') is-invalid @enderror" name="name"
@@ -34,7 +34,7 @@
                             <div style ="line-height: 180% ">
                                 <br>
                             </div>
-                            <div class="form-group">
+                            <div class="form-group" style="margin-bottom: 0">
                                 <label for="email"><i class="zmdi zmdi-email"></i></label>
                                 <input style="font-family:verdana" type="email" id="email" placeholder="Your Email"
                                     class="form-control @error('email') is-invalid @enderror" name="email"
@@ -47,7 +47,7 @@
                             </div>
 
 
-                            <div class="form-group">
+                            <div class="form-group" style="margin-bottom: 0">
                                 <label for="password" class="col-md-4 col-form-label text-md-end"></label>
 
                                     <input style="font-family:verdana;" id="password" type="password"
@@ -63,7 +63,7 @@
                             </div>
 
 
-                            <div class="form-group">
+                            <div class="form-group" >
                                 <label for="password-confirm" class="col-md-4 col-form-label text-md-end"></label>
 
 

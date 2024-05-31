@@ -28,6 +28,11 @@
     <!-- /.content-header -->
     <div class="container" style= "margin: left 50;">
       <div class="card">
+        @if ($errors->has('quantity'))
+          <div class="alert alert-danger">
+            {{ $errors->first('quantity') }}
+          </div>
+        @endif
         <div class="card-header">Add Supply Record Page
           <span class="float-right">
             <a class="btn btn-primary" href="{{ route('supplyRecord.index') }}">Back</a>
@@ -54,16 +59,16 @@
               value=""><br>
 
             <label>Quantity</label><br>
-            <input type="number" required name="quantity" id="quantity" class="form-control"
-              onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57"><br>
+            <input type="number" min="0" required name="quantity" id="quantity" class="form-control"
+              onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57" onchange="displayTotalPriceFromQuantity(this)"><br>
 
             <label>Supplier Unit Price (RM)</label><br>
-            <input type="number" required name="supplier_price" id="supplier_price" step=".01" class="form-control"
+            <input type="number" min="0" required name="supplier_price" id="supplier_price" step=".01" class="form-control"
               placeholder=0.00
               onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : (event.charCode >= 48 && event.charCode <= 57 || event.charCode == 46" onchange="displayTotalPrice(this);"><br>
 
               <label>Supplier Total Price (RM)</label><br>
-            <input type="number" disabled required name="supplier_total_price" id="supplier_total_price" step=".01" class="form-control" placeholder="0.00" value=""><br>
+            <input type="number" min="0" disabled required name="supplier_total_price" id="supplier_total_price" step=".01" class="form-control" placeholder="0.00" value=""><br>
 
             <label>Supplier ID</label><br>
             <select class="form-control" required name="supplier_id" onchange="displaySupplierName(this)">
@@ -97,10 +102,17 @@
       document.getElementById('supplier_name').value = supplierName;
     }
 
+    function displayTotalPriceFromQuantity(selectElement) {
+      var selectedOptionText = selectElement.value;
+      var totalPrice = selectedOptionText * document.getElementById('supplier_price').value;
+      totalPrice = totalPrice.toFixed(2);
+      document.getElementById('supplier_total_price').value = totalPrice;
+    }
+
     function displayTotalPrice(selectElement) {
       var selectedOptionText = selectElement.value;
       var totalPrice = selectedOptionText * document.getElementById('quantity').value;
       totalPrice = totalPrice.toFixed(2);
-      document.getElementById('supplier_total_price').value = number_format(totalPrice, 2);
+      document.getElementById('supplier_total_price').value = totalPrice;
     }
   </script>

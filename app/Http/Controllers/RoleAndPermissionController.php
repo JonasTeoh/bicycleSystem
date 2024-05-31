@@ -26,10 +26,9 @@ class RoleAndPermissionController extends Controller
   public function store(Request $request)
   {
     // $role = Role::create(['name' => $request->input('name')]);
-
     $input = $request->all();
     $role = Role::create($input);
-    foreach($request->input('permissions') as $permission) {
+    foreach ($request->input('permissions') as $permission) {
       $role->givePermissionTo($permission);
     }
     session()->flash('success', 'Added a new role!');
@@ -38,6 +37,9 @@ class RoleAndPermissionController extends Controller
 
   public function destroy($id)
   {
+    if ($id == 1) {
+      return back()->withErrors(['error' => 'Cannot delete Admin Role!']);
+    }
     Role::destroy($id);
     session()->flash('success', 'Deleted successfully!');
     return redirect('roleAndPermission');
@@ -45,6 +47,9 @@ class RoleAndPermissionController extends Controller
 
   public function edit($id)
   {
+    if ($id == 1) {
+      return back()->withErrors(['error' => 'Cannot edit superadmin!']);
+    }
     $role = Role::find($id);
     $permissions = Permission::all();
     return view('roleAndPermission.edit', compact('role', 'permissions'));
@@ -52,6 +57,9 @@ class RoleAndPermissionController extends Controller
 
   public function update(Request $request, $id)
   {
+    if ($id == 1) {
+      return back()->withErrors(['error' => 'Cannot update superadmin!']);
+    }
     $input = $request->all();
     $role = Role::find($id);
     $role->name = $input['name'];

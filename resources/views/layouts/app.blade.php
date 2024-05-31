@@ -36,13 +36,13 @@
       style="position:fixed; width:100%; z-index:9999">
       <div class="container">
         @auth
-        <a class="navbar-brand" href="{{ url('/home') }}">
-          <img src="{{ asset('img/logo.png') }}" alt="..." style="width: 80px; height: 40px; margin-left: 10px">
-        </a>
+          <a class="navbar-brand" href="{{ url('/home') }}">
+            <img src="{{ asset('img/logo.png') }}" alt="..." style="width: 80px; height: 40px; margin-left: 10px">
+          </a>
         @else
-        <a class="navbar-brand" href="{{ url('/') }}">
-          <img src="{{ asset('img/logo.png') }}" alt="..." style="width: 80px; height: 40px; margin-left: 10px">
-        </a>
+          <a class="navbar-brand" href="{{ url('/') }}">
+            <img src="{{ asset('img/logo.png') }}" alt="..." style="width: 80px; height: 40px; margin-left: 10px">
+          </a>
         @endauth
 
         {{-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -68,7 +68,8 @@
               </li>
               @if (Route::has('register'))
                 <li class="nav-item">
-                  <a class="nav-link" href="{{ route('register') }}" style="font-family: verdana">{{ __('Register') }}</a>
+                  <a class="nav-link" href="{{ route('register') }}"
+                    style="font-family: verdana">{{ __('Register') }}</a>
                 </li>
               @endif
             @else
@@ -173,7 +174,6 @@
 
       }
     }
-
   </script>
 
   <style>
@@ -197,10 +197,12 @@
     }
   </style>
 
+  @auth
+    <div class="js-collapse-div" id="js-collapse-div" onclick="sidebarCollapse()" style="">
+      <a href="#" style="text-decoration: none"><i class="fa fa-bars"></i></a>
+    </div>
+  @endauth
 
-  <div class="js-collapse-div" id="js-collapse-div" onclick="sidebarCollapse()" style="">
-    <a href="#" style="text-decoration: none"><i class="fa fa-bars"></i></a>
-  </div>
 </body>
 
 </html>

@@ -49,7 +49,7 @@
             <input type="text" name="name" id="name" class="form-control" value="{{ $supplier->name }}"><br>
 
             <label>Contact Number</label><br>
-            <input type="number" required name="contact_number" id="contact_number" class="form-control" value="{{ $supplier->contact_number }}" onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57"><br>
+            <input type="text" required name="contact_number" id="contact_number" class="form-control" value="{{ $supplier->contact_number }}" onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57"><br>
 
             <input type="submit" value="Save" class="btn btn-success"></br>
             @method('PUT')

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Exports\InventoryExport;
+use App\Models\PurchaseRecord;
 use Carbon\Carbon;
 use App\Models\Inventory;
 use Illuminate\Http\Request;

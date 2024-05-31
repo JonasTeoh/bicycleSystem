@@ -13,14 +13,16 @@ class PurchaseRecord extends Model
       'purchase_date',
       'customer_id',
       'item_id',
-      'quantity'
+      'quantity',
+      'sold_price'
     ];
 
     public $sortable = [
       'purchase_date',
       'customer_id',
       'item_id',
-      'quantity'
+      'quantity',
+      'sold_price'
     ];
 
     public function customer()

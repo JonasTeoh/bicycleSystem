@@ -38,7 +38,7 @@
           <hr>
           <p class="card-text">Name: {{ $user->name }}</p>
           <p class="card-text">Email: {{ $user->email }}</p>
-          <p class="card-text">Role: {{ $user->getRoleNames() }}</p>
+          <p class="card-text">Role: {{ $user->getRoleNames()->first() }}</p>
           <hr>
 
           <form method="POST" action="{{ url('/user/' . $user->id) }}">
@@ -58,7 +58,7 @@
               @if (!@empty($user->getRoleNames()))
               <option value="">Select Option</option>
                 @foreach ($roles as $role)
-                  <option value="{{ $role->name }}">{{ $role->name }}</option>
+                  <option value="{{ $role->name }}" @if ($user->getRoleNames()->first() == $role->name) selected @endif>{{ $role->name }}</option>
                 @endforeach
               @endif
 

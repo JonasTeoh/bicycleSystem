@@ -11,6 +11,9 @@ class UserController extends Controller
 {
   public function register(Request $request)
   {
+    if (auth()->check()) {
+      return redirect('/home');
+    }
     $incomingFields = $request->validate([
       'name' => ['required'],
       'email' => ['required', 'email', 'unique:users,email'],
@@ -19,6 +22,7 @@ class UserController extends Controller
     ]);
     $incomingFields['password'] = bcrypt($incomingFields['password']);
     $user = User::create($incomingFields);
+    $user->assignRole('Guest');
     // auth()->login($user);
     session()->flash('message', 'You have been registered successfully!');
     return redirect('/login');
@@ -26,6 +30,9 @@ class UserController extends Controller
 
   public function login(Request $request)
   {
+    if (auth()->check()) {
+      return redirect('/home');
+    }
     $incomingFields = $request->validate([
       'email' => 'required|email',
       'password' => 'required'
@@ -77,6 +84,9 @@ class UserController extends Controller
 
   public function destroy($id)
   {
+    if ($id == 1) {
+      return back()->withErrors(['error' => 'Cannot delete superadmin!']);
+    }
     User::destroy($id);
     session()->flash('success', 'Deleted successfully!');
     return redirect('user');
@@ -84,6 +94,9 @@ class UserController extends Controller
 
   public function edit($id)
   {
+    if ($id == 1) {
+      return back()->withErrors(['error' => 'Cannot edit superadmin!']);
+    }
     $user = User::find($id);
     $roles = Role::all();
     return view('user.edit', compact('user', 'roles'));
@@ -91,9 +104,13 @@ class UserController extends Controller
 
   public function update(Request $request, $id)
   {
+    if ($id == 1) {
+      return back()->withErrors(['error' => 'Cannot update superadmin!']);
+    }
     $input = $request->all();
     $user = User::find($id);
     $user->update($input);
+    $user->removeRole($user->getRoleNames());
     $user->assignRole($request->input('role'));
     session()->flash('success', 'User updated!');
     return redirect('user');

@@ -51,7 +51,7 @@
             <input type="text" name="name" id="name" class="form-control" value="{{ $inventory->name }}"><br>
 
             <label>Quantity</label><br>
-            <input type="text" name="quantity" id="quantity" class="form-control" value="{{ $inventory->quantity }}"><br>
+            <input type="number" min="0" name="quantity" id="quantity" class="form-control" value="{{ $inventory->quantity }}" onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57"><br>
 
             <div class="form-group">
               <label for="age_category">Age Category</label>
@@ -66,7 +66,7 @@
             </div>
 
             <label>Price (RM)</label><br>
-            <input type="text" name="price" id="price" class="form-control" value="{{ $inventory->price }}"><br>
+            <input type="number" min="0" required name="price" id="price" step=".01" class="form-control" value="{{ $inventory->price }}" onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57 || event.charCode == 46"><br>
 
             <input type="submit" value="Save" class="btn btn-success"></br>
             @method('PUT')

@@ -26,7 +26,11 @@
     <!-- /.content-header -->
     <div class="container" style= "margin: left 50;">
       <div class="card">
-
+        @if ($errors->has('quantity'))
+          <div class="alert alert-danger">
+            {{ $errors->first('quantity') }}
+          </div>
+        @endif
         <div class="card-header">Purchase Record Edit Page
           <span class="float-right">
             <a class="btn btn-primary" href="{{ url('/purchaseRecord') }}">Back</a>
@@ -40,6 +44,9 @@
           <p class="card-text">Item ID: {{ $purchaseRecord->item_id }}</p>
           <p class="card-text">Item Name: {{ $purchaseRecord->inventory->name }}</p>
           <p class="card-text">Quantity: {{ $purchaseRecord->quantity }}</p>
+          <p class="card-text">Unit Price (RM): {{ $purchaseRecord->sold_price }}</p>
+          <p class="card-text">Total Price (RM):
+            {{ number_format($purchaseRecord->sold_price * $purchaseRecord->quantity, 2) }}</p>
           <p class="card-text">Customer ID: {{ $purchaseRecord->customer_id }}</p>
           <p class="card-text">Customer Name: {{ $purchaseRecord->customer->name }}</p>
           <hr>
@@ -66,15 +73,15 @@
               value="{{ $purchaseRecord->inventory->name }}"><br>
 
             <label>Quantity</label><br>
-            <input type="number" required name="quantity" id="quantity" class="form-control"
+            <input type="number" min="0" required name="quantity" id="quantity" class="form-control"
               onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57"
-              value="{{ $purchaseRecord->quantity }}"><br>
+              value="{{ $purchaseRecord->quantity }}" onchange="displayTotalPriceFromQuantity(this);"><br>
 
             <label>Unit Price (RM)</label><br>
-            <input type="number" disabled required name="price" id="price" step=".01" class="form-control"
-              placeholder=0.00
+            <input type="number" min="0" required name="sold_price" id="sold_price" step=".01"
+              class="form-control" placeholder=0.00
               onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : (event.charCode >= 48 && event.charCode <= 57 || event.charCode == 46"
-              onchange="displayTotalPrice(this);"><br>
+              onchange="displayTotalPrice(this);" value="{{ $purchaseRecord->sold_price }}"><br>
 
             <label>Total Price (RM)</label><br>
             <input type="number" disabled required name="total_price" id="total_price" step=".01"
@@ -126,7 +133,9 @@
       var selectedItemId = selectElement.options[selectElement.selectedIndex].value;
       @foreach ($inventory as $item)
         if (selectedItemId == {{ $item->id }}) {
-          document.getElementById('price').value = {{ $item->price }};
+          var itemPrice = {{ $item->price }};
+          itemPrice = itemPrice.toFixed(2);
+          document.getElementById('sold_price').value = itemPrice;
         }
       @endforeach
     }
@@ -141,27 +150,20 @@
       var selectedOptionText = selectElement.value;
       var totalPrice = selectedOptionText * document.getElementById('quantity').value;
       totalPrice = totalPrice.toFixed(2);
-      document.getElementById('total_price').value = number_format(totalPrice, 2);
+      document.getElementById('total_price').value = totalPrice;
     }
 
     function displayTotalPriceFromQuantity(selectElement) {
       var selectedOptionText = selectElement.value;
-      var totalPrice = selectedOptionText * document.getElementById('price').value;
+      var totalPrice = selectedOptionText * document.getElementById('sold_price').value;
       totalPrice = totalPrice.toFixed(2);
       document.getElementById('total_price').value = totalPrice;
     }
 
     document.addEventListener('DOMContentLoaded', function() {
-      @foreach ($inventory as $item)
-        if ({{ $purchaseRecord->item_id }} == {{ $item->id }}) {
-          var itemPrice = {{ $item->price }};
-          itemPrice = itemPrice.toFixed(2);
-          document.getElementById('price').value = itemPrice
-        }
-      @endforeach
 
       var quantity = {{ $purchaseRecord->quantity }};
-      var totalPrice = document.getElementById('price').value * quantity;
+      var totalPrice = document.getElementById('sold_price').value * quantity;
 
       totalPriceInFormat = totalPrice.toFixed(2);
       document.getElementById('total_price').value = totalPriceInFormat;

@@ -41,7 +41,7 @@
             <input type="text" required name="name" id="name" class="form-control"><br>
 
             <label>Quantity</label><br>
-            <input type="number" required name="quantity" id="quantity" class="form-control"
+            <input type="number" min="0" required name="quantity" id="quantity" class="form-control" value="0"
               onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57"><br>
 
             <div class="form-group">
@@ -57,9 +57,7 @@
             </div>
 
             <label>Price (RM)</label><br>
-            <input type="number" required name="price" id="price" step=".01" class="form-control"
-              placeholder=0.00
-              onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : (event.charCode >= 48 && event.charCode <= 57 || event.charCode == 46"><br>
+            <input type="number" min="0" required name="price" id="price" step=".01" class="form-control" placeholder="0.00" value="" onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57 || event.charCode == 46"><br>
 
             <input type="submit" value="Save" class="btn btn-success"></br>
           </form>

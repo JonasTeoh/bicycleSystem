@@ -85,8 +85,8 @@
                         <td>{{ $item->item_id }}</td>
                         <td>{{ $item->inventory->name }}</td>
                         <td>{{ $item->quantity }}</td>
-                        <td>{{ $item->inventory->price }}</td>
-                        <td>{{ number_format($item->inventory->price * $item->quantity, 2)}}</td>
+                        <td>{{ $item->sold_price }}</td>
+                        <td>{{ number_format($item->sold_price * $item->quantity, 2)}}</td>
                         <td>{{ $item->customer_id }}</td>
                         <td>{{ $item->customer->name }}</td>
                         <td>

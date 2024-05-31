@@ -48,6 +48,13 @@
                 {{ session('success') }}
               </div>
             @endif
+            @if (session()->has('errors'))
+              <div class="alert alert-danger">
+                @foreach (session()->get('errors')->all() as $error)
+                  {{ $error }}
+                @endforeach
+              </div>
+            @endif
 
             <div class="card-header">User Info</div>
             <div class="card-body">
@@ -93,20 +100,23 @@
                                 <i class="fa fa-eye" aria-hidden="true"></i> View
                               </button>
                             </a>
-                            <a href="{{ url('/user/' . $item->id . '/edit') }}" title="Edit User" class="mr-2">
-                              <button class="btn btn-primary btn-sm">
-                                <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                                Edit
-                              </button>
-                            </a>
-                            <form method="POST" action="{{ url('/user' . '/' . $item->id) }}" accept-charset="UTF-8"
-                              style="display:inline">
-                              {{ method_field('DELETE') }}
-                              {{ csrf_field() }}
-                              <button type="submit" class="btn btn-danger btn-sm" title="Delete User"
-                                onclick="return confirm('Confirm delete?')">
-                                <i class="fa fa-trash-o" aria-hidden="true"></i> Delete
-                              </button>
+                            @if ($item->id != 1)
+                              <a href="{{ url('/user/' . $item->id . '/edit') }}" title="Edit User" class="mr-2">
+                                <button class="btn btn-primary btn-sm">
+                                  <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                  Edit
+                                </button>
+                              </a>
+                              <form method="POST" action="{{ url('/user' . '/' . $item->id) }}" accept-charset="UTF-8"
+                                style="display:inline">
+                                {{ method_field('DELETE') }}
+                                {{ csrf_field() }}
+                                <button type="submit" class="btn btn-danger btn-sm" title="Delete User"
+                                  onclick="return confirm('Confirm delete?')">
+                                  <i class="fa fa-trash-o" aria-hidden="true"></i> Delete
+                                </button>
+                            @endif
+
                             </form>
                           </div>
                         </td>

@@ -100,7 +100,7 @@
                               {{ method_field('DELETE') }}
                               {{ csrf_field() }}
                               <button type="submit" class="btn btn-danger btn-sm" title="Delete Customer"
-                                onclick="return confirm('Confirm delete?')">
+                                onclick="return confirmDelete()">
                                 <i class="fa fa-trash-o" aria-hidden="true"></i> Delete
                               </button>
                             </form>
@@ -140,5 +140,27 @@
       $('#ListCourse').DataTable();
     });
 
+  </script>
+  <script>
+    function confirmDelete() {
+      var confirmation = prompt("If you delete the item, all the relevant data inside purchase record and supply record will also be deleted. Please ensure that you have export all the data before deleting.\nType 'confirm' to delete:", "");
+      if (confirmation.toLowerCase() === "confirm") {
+        // Perform the delete operation
+        // (e.g., submit a form, make an AJAX request)
+        return true; // Allow the default action (e.g., form submission)
+      } else {
+        return false; // Prevent the default action (e.g., form submission)
+      }
+    }
+    function confirmUpdate() {
+      var confirmation = prompt("If you delete the item, all the relevant data inside purchase record and supply record will also be deleted. Please ensure that you have export all the data before deleting.\nType 'confirm' to delete:", "");
+      if (confirmation.toLowerCase() === "confirm") {
+        // Perform the delete operation
+        // (e.g., submit a form, make an AJAX request)
+        return true; // Allow the default action (e.g., form submission)
+      } else {
+        return false; // Prevent the default action (e.g., form submission)
+      }
+    }
   </script>
 @endsection
