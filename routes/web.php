@@ -11,24 +11,27 @@ use App\Http\Middleware\EnsureUserIsAuthenticated;
 use App\Http\Controllers\RoleAndPermissionController;
 
 Route::get('/', function () {
-    return view('welcome');
+  if (auth()->check()) {
+    return redirect('/home');
+  }
+  return view('welcome');
 });
 
 Route::get('/login', function () {
   if (auth()->check()) {
     return redirect('/home');
   }
-    return view('auth/login');
+  return view('auth/login');
 });
 
 Route::get('/register', function () {
   if (auth()->check()) {
     return redirect('/home');
   }
-    return view('auth/register');
+  return view('auth/register');
 })->name('register');
 
-Route::middleware('auth')->group(function() {
+Route::middleware('auth')->group(function () {
   Route::get('/home', function () {
     return view('home');
   })->name('home');
@@ -52,4 +55,5 @@ Route::middleware('auth')->group(function() {
 
 Route::post('/register', [UserController::class, 'register']);
 Route::post('/login', [UserController::class, 'login'])->name('login');
-Route::post('/logout', [UserController::class, 'logout'])->name('logout');;
+Route::post('/logout', [UserController::class, 'logout'])->name('logout');
+;
