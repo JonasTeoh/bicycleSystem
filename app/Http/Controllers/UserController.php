@@ -22,7 +22,11 @@ class UserController extends Controller
     ]);
     $incomingFields['password'] = bcrypt($incomingFields['password']);
     $user = User::create($incomingFields);
-    $user->assignRole('Guest');
+    if ($user->id == 1) {
+      $user->assignRole('Admin');
+    }else{
+      $user->assignRole('Guest');
+    }
     // auth()->login($user);
     session()->flash('message', 'You have been registered successfully!');
     return redirect('/login');

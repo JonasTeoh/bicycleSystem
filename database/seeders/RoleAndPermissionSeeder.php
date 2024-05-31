@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
@@ -58,6 +59,22 @@ class RoleAndPermissionSeeder extends Seeder
     foreach ($permission as $key => $value) {
       Permission::create(['name' => $value]);
     }
-  }
+    // Create roles
+    $admin = Role::create(['name' => 'Admin']);
+    $staff = Role::create(['name' => 'Staff']);
+    $guest = Role::create(['name' => 'Guest']);
 
+    // Assign all permissions to Admin
+    $permissions = Permission::all();
+    $admin->givePermissionTo($permissions);
+
+    // Assign only non user and role permissions to Staff
+    $staffPermissions = $permissions->filter(function ($permission) {
+      return !str_starts_with($permission, 'user-') && !str_starts_with($permission, 'role-');
+  });
+    $staff->givePermissionTo($staffPermissions);
+
+    // Assign no permission to Guest
+    $guest->givePermissionTo([]);
+  }
 }
