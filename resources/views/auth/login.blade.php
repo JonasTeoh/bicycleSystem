@@ -30,6 +30,7 @@
             <form method="POST" action="/login" class="register-form">
               @csrf
               <div class="form-group">
+                <h6>Email:</h6>
                 <label for="email"><i class="zmdi zmdi-account material-icons-name"></i></label>
                 <input style="font-family:verdana;" type="text" name="email" id="email"
                   placeholder="Email"class="form-control @error('email') is-invalid @enderror" name="email"
@@ -41,6 +42,7 @@
                 @enderror
               </div>
               <div class="form-group">
+                <h6>Password:</h6>
                 <label for="password"><i class="zmdi zmdi-lock"></i></label>
                 <input style="font-family:verdana;" type="password" name="password" id="password"
                   placeholder="Password"class="form-control @error('password') is-invalid @enderror" name="password"
