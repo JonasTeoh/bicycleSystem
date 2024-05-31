@@ -37,7 +37,7 @@
             <h5 class="card-text">Item ID: {{ $purchaseRecord->item_id }}</h5>
             <h5 class="card-text">Item Name: {{ $purchaseRecord->inventory->name }}</h5>
             <h5 class="card-text">Quantity: {{ $purchaseRecord->quantity }}</h5>
-            <h5 class="card-text">Unit Price (RM): {{ $purchaseRecord->sold_price }}</h5>
+            <h5 class="card-text">Sold Price (RM): {{ $purchaseRecord->sold_price }}</h5>
             <h5 class="card-text">Total Price (RM): {{ number_format($purchaseRecord->sold_price * $purchaseRecord->quantity, 2) }}</h5>
             <h5 class="card-text">Customer ID: {{ $purchaseRecord->customer_id }}</h5>
             <h5 class="card-text">Customer Name: {{ $purchaseRecord->customer->name }}</h5>

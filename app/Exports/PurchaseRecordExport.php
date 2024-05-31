@@ -29,7 +29,7 @@ class PurchaseRecordExport implements FromCollection
     return collect([
       $headers, // Add the header row first
       $data->map(function ($data) use ($headers) {
-        $totalPrice = $data->quantity * $data->inventory->price; // Calculate total price
+        $totalPrice = $data->quantity * $data->sold_price; // Calculate total price
 
         return [
           'id' => $data->id,
@@ -37,7 +37,7 @@ class PurchaseRecordExport implements FromCollection
           'item_id' => $data->item_id,
           'item_name' => $data->inventory->name,
           'quantity' => $data->quantity,
-          'unit_price' => $data->inventory->price,
+          'sold_price' => $data->sold_price,
           'total_price' => $totalPrice,
           'customer_id' => $data->customer_id,
           'customer_name' => $data->customer->name,

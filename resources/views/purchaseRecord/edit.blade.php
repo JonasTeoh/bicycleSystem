@@ -44,7 +44,7 @@
           <p class="card-text">Item ID: {{ $purchaseRecord->item_id }}</p>
           <p class="card-text">Item Name: {{ $purchaseRecord->inventory->name }}</p>
           <p class="card-text">Quantity: {{ $purchaseRecord->quantity }}</p>
-          <p class="card-text">Unit Price (RM): {{ $purchaseRecord->sold_price }}</p>
+          <p class="card-text">Sold Price (RM): {{ $purchaseRecord->sold_price }}</p>
           <p class="card-text">Total Price (RM):
             {{ number_format($purchaseRecord->sold_price * $purchaseRecord->quantity, 2) }}</p>
           <p class="card-text">Customer ID: {{ $purchaseRecord->customer_id }}</p>
@@ -77,7 +77,7 @@
               onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57"
               value="{{ $purchaseRecord->quantity }}" onchange="displayTotalPriceFromQuantity(this);"><br>
 
-            <label>Unit Price (RM)</label><br>
+            <label>Sold Price (RM)</label><br>
             <input type="number" min="0" required name="sold_price" id="sold_price" step=".01"
               class="form-control" placeholder=0.00
               onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : (event.charCode >= 48 && event.charCode <= 57 || event.charCode == 46"

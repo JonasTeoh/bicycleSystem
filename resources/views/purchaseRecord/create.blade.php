@@ -63,7 +63,7 @@
               onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57"
               onchange="displayTotalPriceFromQuantity(this)"><br>
 
-            <label>Unit Price (RM)</label><br>
+            <label>Sold Price (RM)</label><br>
             <input type="number" min="0" name="sold_price" id="sold_price" step=".01" class="form-control"
               placeholder=0.00
               onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : (event.charCode >= 48 && event.charCode <= 57 || event.charCode == 46"

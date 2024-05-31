@@ -69,7 +69,7 @@
                       <th>Item ID</th>
                       <th>Item Name</th>
                       <th>Quantity</th>
-                      <th>Unit Price (RM)</th>
+                      <th>Sold Price (RM)</th>
                       <th>Total Price (RM)</th>
                       <th>Customer ID</th>
                       <th>Customer Name</th>
