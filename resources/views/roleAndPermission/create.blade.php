@@ -43,7 +43,9 @@
 
             <div class="accordion-body">
               <tr>
+                <label for="selectAll">
                 <th><input type="checkbox" id="selectAll" style="margin-bottom: 15px"> Select All</th>
+                </label>
               </tr><br>
               @foreach ($permissions as $permission)
               <tr>
