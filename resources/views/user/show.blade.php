@@ -36,7 +36,7 @@
           <div class="card-body">
             <h5 class="card-text">Name: {{ $user->name }}</h5>
             <h5 class="card-text">Email: {{ $user->email }}</h5>
-            <h5 class="card-text">Role: {{ $user->getRoleNames() }}</h5>
+            <h5 class="card-text">Role: {{ $user->getRoleNames()->first() }}</h5>
           </div>
 
           </hr>

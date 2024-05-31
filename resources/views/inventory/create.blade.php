@@ -46,7 +46,8 @@
 
             <div class="form-group">
               <label for="age_category">Age Category</label>
-              <select class="form-control" id="age_category" name="age_category" onchange="">
+              <select class="form-control" required id="age_category" name="age_category" onchange="">
+                <option value="">Select Option</option>
                 <option value="Preschool 4-7">Preschool 4-7</option>
                 <option value="Kid 8-12">Kid 8-12</option>
                 <option value="Teen 13-17">Teen 13-17</option>
