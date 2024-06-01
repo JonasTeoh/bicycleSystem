@@ -88,7 +88,7 @@
               class="form-control" placeholder="0.00" value=""><br>
 
             <label>Supplier ID</label><br>
-            <select class="form-control" required name="customer_id" onchange="displaySupplierName(this)"
+            <select class="form-control" required name="supplier_id" onchange="displaySupplierName(this)"
               value="{{ $supplyRecord->supplier_id }}">
               @foreach ($supplier as $supplierId => $supplierName)
                 <option value="{{ $supplierId }}" @if ($supplierId == $supplyRecord->supplier_id) selected @endif>
