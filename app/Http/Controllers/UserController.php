@@ -80,8 +80,9 @@ class UserController extends Controller
   public function store(Request $request)
   {
     $input = $request->all();
+    $input['password'] = bcrypt($input['password']);
     $user = User::create($input);
-    $user->assignRole($request->input('role'));
+    $user->assignRole($request->input('Guest'));
     session()->flash('success', 'Added a new user!');
     return redirect('user');
   }
@@ -114,7 +115,7 @@ class UserController extends Controller
     $input = $request->all();
     $user = User::find($id);
     $user->update($input);
-    $user->removeRole($user->getRoleNames());
+    $user->removeRole($user->getRoleNames()->first());
     $user->assignRole($request->input('role'));
     session()->flash('success', 'User updated!');
     return redirect('user');

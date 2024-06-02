@@ -1,10 +1,8 @@
+<link rel="stylesheet" href="plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+<script src="https://kit.fontawesome.com/bc8e231302.js" crossorigin="anonymous"></script>
 
 
-  <link rel="stylesheet" href="plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
-  <script src="https://kit.fontawesome.com/bc8e231302.js" crossorigin="anonymous"></script>
-
-
-  @section('content')
+@section('content')
   @extends('layouts.app')
   <!-- Main Sidebar Container -->
   @include('layouts.sidebar')
@@ -44,6 +42,12 @@
 
             <label>Email</label><br>
             <input type="email" required name="email" id="email" class="form-control"><br>
+
+            <label>Password</label><br>
+            <input id="password" type="password" placeholder="Password" class="form-control @error('password') is-invalid @enderror" name="password" required>
+
+            <label>Password Confirmation</label><br>
+            <input style="font-family:verdana;" id="password-confirmation" type="password" placeholder="Password Confirmation" class="form-control" name="password_confirmation" required autocomplete="new-password">
 
             <label>Role</label><br>
             <select class="form-control" required name="role">
