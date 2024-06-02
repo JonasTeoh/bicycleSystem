@@ -79,10 +79,15 @@ class UserController extends Controller
 
   public function store(Request $request)
   {
-    $input = $request->all();
+    $input = $request->validate([
+      'name' => ['required'],
+      'email' => ['required', 'email', 'unique:users,email'],
+      'password' => 'required|confirmed|min:8|max:200'
+      // 'password_confirmation' => ['required', 'min:8', 'max: 200']
+    ]);
     $input['password'] = bcrypt($input['password']);
     $user = User::create($input);
-    $user->assignRole($request->input('Guest'));
+    $user->assignRole($request->input('role'));
     session()->flash('success', 'Added a new user!');
     return redirect('user');
   }

@@ -44,10 +44,17 @@
             <input type="email" required name="email" id="email" class="form-control"><br>
 
             <label>Password</label><br>
-            <input id="password" type="password" placeholder="Password" class="form-control @error('password') is-invalid @enderror" name="password" required>
+            <input id="password" type="password" placeholder="Password"
+              class="form-control @error('password') is-invalid @enderror" name="password" required><br>
+            @error('password')
+              <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+              </span>
+            @enderror
 
             <label>Password Confirmation</label><br>
-            <input style="font-family:verdana;" id="password-confirmation" type="password" placeholder="Password Confirmation" class="form-control" name="password_confirmation" required autocomplete="new-password">
+            <input style="font-family:verdana;" id="password-confirm" type="password" placeholder="Password Confirmation"
+              class="form-control" name="password_confirmation" required autocomplete="new-password"><br>
 
             <label>Role</label><br>
             <select class="form-control" required name="role">
