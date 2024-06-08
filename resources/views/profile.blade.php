@@ -7,7 +7,11 @@
     <div class="row justify-content-center">
       <div class="col-md-8">
         <div class="card">
-          <div class="card-header">Profile</div>
+          <div class="card-header">Profile
+            <span class="float-right">
+              <a class="btn btn-primary" href="{{ url('/home') }}">Back</a>
+            </span>
+          </div>
 
           <div class="card-body" style="justify-content: center; display: flex; align-items: center; flex-direction:column">
             @if (session('success'))
