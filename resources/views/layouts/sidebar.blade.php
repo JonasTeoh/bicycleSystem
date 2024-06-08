@@ -76,7 +76,7 @@
             <p>Dashboard</p>
           </a>
         </li>
-        {{-- @can(['user-list', 'role-list']) --}}
+        @can(['user-list', 'role-list'])
           <li class="nav-item roles-permission">
             <a href="#" class="nav-link" onclick="openMenuRolesPermission();">
               <i class="nav-icon fa-solid fa-key"></i>
@@ -114,7 +114,7 @@
               {{-- @endcan --}}
             </ul>
           </li>
-        {{-- @endcan --}}
+        @endcan
         @can('customer-list')
         <li class="nav-item">
           <a href="{{ url('/customer') }}" class="nav-link">

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
+use Illuminate\Support\Facades\Log;
 
 
 class UserController extends Controller
@@ -24,7 +25,7 @@ class UserController extends Controller
     $user = User::create($incomingFields);
     if ($user->id == 1) {
       $user->assignRole('Admin');
-    }else{
+    } else {
       $user->assignRole('Guest');
     }
     // auth()->login($user);
@@ -73,7 +74,7 @@ class UserController extends Controller
 
   public function create()
   {
-    $roles = Role::pluck('name','id')->all();
+    $roles = Role::pluck('name', 'id')->all();
     return view('user.create', compact('roles'));
   }
 
@@ -117,8 +118,14 @@ class UserController extends Controller
     if ($id == 1) {
       return back()->withErrors(['error' => 'Cannot update superadmin!']);
     }
-    $input = $request->all();
+    $input = $request->validate([
+      'name' => ['required'],
+      'email' => ['required', 'email'],
+      'password' => 'required|confirmed|min:8|max:200'
+      // 'password_confirmation' => ['required', 'min:8', 'max: 200']
+    ]);
     $user = User::find($id);
+    $input['password'] = bcrypt($input['password']);
     $user->update($input);
     $user->removeRole($user->getRoleNames()->first());
     $user->assignRole($request->input('role'));
@@ -130,5 +137,33 @@ class UserController extends Controller
   {
     $user = User::find($id);
     return view('user.show')->with('user', $user);
+  }
+
+  public function profile()
+  {
+    $user = auth()->user();
+    return view('profile', compact('user'));
+  }
+
+  public function updateProfile(Request $request, $id)
+  {
+    if (auth()->user()->id == $id) {
+      Log::info('haloddd'.auth()->user()->id.$id);
+      $input = $request->validate([
+        'name' => ['required'],
+        'password' => 'required|confirmed|min:8|max:200'
+        // 'password_confirmation' => ['required', 'min:8', 'max: 200']
+      ]);
+      Log::info('middle'.auth()->user()->id.$id);
+      $user = User::find($id);
+      $input['password'] = bcrypt($input['password']);
+      Log::info("User " . auth()->user()->name . " (id: " . auth()->user()->id . ") updated user " . $user->name . " (id: " . $user->id . ")");
+
+      $user->update($input);
+      session()->flash('success', 'Profile updated!');
+
+      Log::info('final'.auth()->user()->id.$id);
+      return redirect('/profile');
+    }
   }
 }

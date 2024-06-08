@@ -46,23 +46,37 @@
 
             <input type="hidden" name="id" value="{{ $user->id }}">
             <label>Name</label><br>
-            <input type="text" required name="name" id="name" class="form-control"
-              value="{{ $user->name }}"><br>
-
-            <label>Email</label><br>
-            <input type="email" required name="contact_number" id="contact_number" class="form-control"
-              value="{{ $user->email }}"><br>
+            <input type="text" required name="name" id="name" class="form-control" value="{{ $user->name }}"><br>
+            <input type="hidden" required name="email" id="email" class="form-control" value="{{ $user->email }}"><br>
+            @error('email')
+              <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+              </span>
+            @enderror
 
             <label>Role</label><br>
             <select class="form-control" required name="role" value="{{ $user->getRoleNames() }}">
               @if (!@empty($user->getRoleNames()))
-              <option value="">Select Option</option>
+                <option value="">Select Option</option>
                 @foreach ($roles as $role)
-                  <option value="{{ $role->name }}" @if ($user->getRoleNames()->first() == $role->name) selected @endif>{{ $role->name }}</option>
+                  <option value="{{ $role->name }}" @if ($user->getRoleNames()->first() == $role->name) selected @endif>
+                    {{ $role->name }}</option>
                 @endforeach
               @endif
 
             </select><br>
+            <label>Password</label><br>
+            <input id="password" type="password" placeholder="Password"
+              class="form-control @error('password') is-invalid @enderror" name="password" required><br>
+            @error('password')
+              <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+              </span>
+            @enderror
+
+            <label>Password Confirmation</label><br>
+            <input style="font-family:verdana;" id="password-confirm" type="password" placeholder="Password Confirmation"
+              class="form-control" name="password_confirmation" required autocomplete="new-password"><br>
 
             <input type="submit" value="Save" class="btn btn-success"></br>
             @method('PUT')

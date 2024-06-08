@@ -43,6 +43,8 @@ Route::middleware('auth')->group(function () {
   Route::resource('/roleAndPermission', RoleAndPermissionController::class)->middleware('permission:role-list');
   Route::resource('/user', UserController::class)->middleware('permission:user-list');
 
+  Route::get('/profile', [UserController::class, 'profile']);
+  Route::put('/profile/{id}', [UserController::class, 'updateProfile']);
   Route::get('customers/export/', [CustomerController::class, 'export']);
   Route::get('inventories/export/', [InventoryController::class, 'export']);
   Route::get('purchaseRecords/export/', [PurchaseRecordController::class, 'export']);

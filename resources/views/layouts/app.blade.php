@@ -83,7 +83,9 @@
                   <form id="logout-form" method="POST" action="/logout" style="display: none;">
                     @csrf
                   </form>
-
+                  <a class="dropdown-item" href="/profile">
+                    {{ __('Profile') }}
+                  </a>
                   <a class="dropdown-item" href="#"
                     onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                     {{ __('Logout') }}
