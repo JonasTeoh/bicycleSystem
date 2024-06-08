@@ -44,7 +44,7 @@
         width: 40%;">
       </div>
       <div class="info" style="padding-left: 0; pdding-right:0">
-        <a href="#" class="d-block" style="text-decoration: none; color:black; text-align: center ">
+        <a href="/profile" class="d-block" style="text-decoration: none; color:black; text-align: center ">
           {{ Auth::user()->name }}
         </a>
       </div>
