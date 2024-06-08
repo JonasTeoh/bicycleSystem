@@ -46,7 +46,7 @@
 
             <input type="hidden" name="id" value="{{ $user->id }}">
             <label>Name</label><br>
-            <input type="text" required name="name" id="name" class="form-control" value="{{ $user->name }}"><br>
+            <input type="text" required name="name" id="name" class="form-control" value="{{ $user->name }}">
             <input type="hidden" required name="email" id="email" class="form-control" value="{{ $user->email }}"><br>
             @error('email')
               <span class="invalid-feedback" role="alert">
