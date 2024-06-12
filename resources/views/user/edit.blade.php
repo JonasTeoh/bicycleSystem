@@ -65,7 +65,7 @@
               @endif
 
             </select><br>
-            <label>Password</label><br>
+            {{-- <label>Password</label><br>
             <input id="password" type="password" placeholder="Password"
               class="form-control @error('password') is-invalid @enderror" name="password" required><br>
             @error('password')
@@ -76,7 +76,7 @@
 
             <label>Password Confirmation</label><br>
             <input style="font-family:verdana;" id="password-confirm" type="password" placeholder="Password Confirmation"
-              class="form-control" name="password_confirmation" required autocomplete="new-password"><br>
+              class="form-control" name="password_confirmation" required autocomplete="new-password"><br> --}}
 
             <input type="submit" value="Save" class="btn btn-success"></br>
             @method('PUT')

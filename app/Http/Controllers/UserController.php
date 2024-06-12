@@ -118,14 +118,15 @@ class UserController extends Controller
     if ($id == 1) {
       return back()->withErrors(['error' => 'Cannot update superadmin!']);
     }
-    $input = $request->validate([
-      'name' => ['required'],
-      'email' => ['required', 'email'],
-      'password' => 'confirmed|min:8|max:200'
-      // 'password_confirmation' => ['required', 'min:8', 'max: 200']
-    ]);
+    // $input = $request->validate([
+    //   'name' => ['required'],
+    //   'email' => ['required', 'email'],
+    //   'password' => 'confirmed|min:8|max:200'
+    //   // 'password_confirmation' => ['required', 'min:8', 'max: 200']
+    // ]);
     $user = User::find($id);
-    $input['password'] = bcrypt($input['password']);
+    // $input['password'] = bcrypt($input['password']);
+    $input = $request->all();
     $user->update($input);
     $user->removeRole($user->getRoleNames()->first());
     $user->assignRole($request->input('role'));
