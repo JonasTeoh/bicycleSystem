@@ -41,13 +41,18 @@ class SupplyRecordController extends Controller
     $supplyRecord = SupplyRecord::find($id);
     if ($supplyRecord) {
       $inventoryItem = Inventory::find($supplyRecord->item_id);
-      $inventoryItem->quantity -= $supplyRecord->quantity;
-      $inventoryItem->save();
+      if ($inventoryItem->quantity >= $supplyRecord->quantity) {
+        $inventoryItem->quantity -= $supplyRecord->quantity;
+        $inventoryItem->save();
+        SupplyRecord::destroy($id);
+        session()->flash('success', 'Deleted successfully!');
+        return redirect('supplyRecord');
+      } else {
+        // Handle insufficient inventory scenario (throw exception, log error, etc.)
+        return redirect()->back()->withErrors(['quantity' => 'Insufficient inventory for this item.']);
+      }
     }
 
-    SupplyRecord::destroy($id);
-    session()->flash('success', 'Deleted successfully!');
-    return redirect('supplyRecord');
   }
 
   public function edit($id)
@@ -75,15 +80,15 @@ class SupplyRecordController extends Controller
     // Log::info('Original Quantity: ' . $supplyRecordOriQuantity);
 
     $inventoryItem = Inventory::find($supplyRecord->item_id);
-    $quantityChange =  $supplyRecord->quantity - $supplyRecordOriQuantity; // Calculate quantity change
-    Log::info('Change in quantity:'.$quantityChange);
+    $quantityChange = $supplyRecord->quantity - $supplyRecordOriQuantity; // Calculate quantity change
+    Log::info('Change in quantity:' . $quantityChange);
 
     if ($quantityChange > 0) {
       $inventoryItem->quantity += $quantityChange;
     } else if ($quantityChange < 0) {
       if ($inventoryItem->quantity >= abs($quantityChange)) {
         $inventoryItem->quantity -= abs($quantityChange);
-        Log::info(abs($quantityChange) .'and'. $inventoryItem->quantity);
+        Log::info(abs($quantityChange) . 'and' . $inventoryItem->quantity);
       } else {
         // Handle insufficient inventory scenario (throw exception, log error, etc.)
         return redirect()->back()->withErrors(['quantity' => 'Insufficient inventory for this item.']);

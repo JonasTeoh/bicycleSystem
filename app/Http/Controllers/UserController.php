@@ -121,7 +121,7 @@ class UserController extends Controller
     $input = $request->validate([
       'name' => ['required'],
       'email' => ['required', 'email'],
-      'password' => 'required|confirmed|min:8|max:200'
+      'password' => 'confirmed|min:8|max:200'
       // 'password_confirmation' => ['required', 'min:8', 'max: 200']
     ]);
     $user = User::find($id);

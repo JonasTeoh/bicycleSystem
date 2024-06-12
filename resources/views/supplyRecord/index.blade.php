@@ -14,7 +14,6 @@
   .status-buttons button {
     margin-right: 10px;
   }
-
 </style>
 
 @section('content')
@@ -43,6 +42,11 @@
       <div class="row">
         <div class="col-md-12">
           <div class="card">
+            @if ($errors->has('quantity'))
+              <div class="alert alert-danger">
+                {{ $errors->first('quantity') }}
+              </div>
+            @endif
             @if (session('success'))
               <div class="alert alert-success">
                 {{ session('success') }}
@@ -86,7 +90,7 @@
                         <td>{{ $item->inventory->name }}</td>
                         <td>{{ $item->quantity }}</td>
                         <td>{{ $item->supplier_price }}</td>
-                        <td>{{ number_format($item->supplier_price * $item->quantity, 2)}}</td>
+                        <td>{{ number_format($item->supplier_price * $item->quantity, 2) }}</td>
                         <td>{{ $item->supplier_id }}</td>
                         <td>{{ $item->supplier->name }}</td>
                         <td>
@@ -97,14 +101,15 @@
                                 <i class="fa fa-eye" aria-hidden="true"></i> View
                               </button>
                             </a>
-                            <a href="{{ url('/supplyRecord/' . $item->id . '/edit') }}" title="Edit Supply Record" class="mr-2">
+                            <a href="{{ url('/supplyRecord/' . $item->id . '/edit') }}" title="Edit Supply Record"
+                              class="mr-2">
                               <button class="btn btn-primary btn-sm">
                                 <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                 Edit
                               </button>
                             </a>
-                            <form method="POST" action="{{ url('/supplyRecord' . '/' . $item->id) }}" accept-charset="UTF-8"
-                              style="display:inline">
+                            <form method="POST" action="{{ url('/supplyRecord' . '/' . $item->id) }}"
+                              accept-charset="UTF-8" style="display:inline">
                               {{ method_field('DELETE') }}
                               {{ csrf_field() }}
                               <button type="submit" class="btn btn-danger btn-sm" title="Delete Customer"
@@ -147,6 +152,5 @@
     $(document).ready(function() {
       $('#ListCourse').DataTable();
     });
-
   </script>
 @endsection
