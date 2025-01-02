@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
   <meta name="description" content="" />
   <meta name="author" content="" />
-  <title>Eco Haulage</title>
+  <title>Bajet Basikal</title>
   <!-- Favicon-->
   <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
   <!-- Font Awesome icons (free version)-->
@@ -30,15 +30,26 @@
     </div>
   </nav> --}}
   <!-- Masthead-->
-  <header class="masthead" style="background-image: linear-gradient(rgba(0, 0, 0, 0.3),
-  rgba(0, 0, 0, 0.3)), url('img/welcomeBackground.png'); height:100vh;">
+  <header class="masthead"
+    style="background-image: linear-gradient(rgba(0, 0, 0, 0.3),
+  rgba(0, 0, 0, 0.3)), url('img/welcomeBackground.png'); background-size: cover; height:100vh;">
 
-    <div class="container" style="background: rgba(255, 255, 255, 0.8); padding-top: 50px; padding-bottom: 50px; margin-top:-200px; border-radius: 20px; padding-top:30px">
-      <img src="{{ asset('img/logo.png') }}" style="width: 400px; height: 200px; border-radius: 5px; margin-bottom: 20px;">
-      <div class="masthead-subheading" style="color: #337ab7">Welcome to Kedai Basikal Budget & Customized</div>
-      <div class="masthead-heading text-uppercase" style="margin-bottom:30px; color:black;">Bicycle Inventory Management System</div>
-      <a class="btn btn-primary btn-xl text-uppercase" href="/login" style="margin-right: 5px; padding-left: 50px; padding-right: 50px">Login</a>
-      <a class="btn btn-primary btn-xl text-uppercase" href="/register" style="margin-left: 5px">Register</a>
+    <div class="container d-flex justify-content-center align-items-center flex-column"
+      style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 75vw; height: 75vh; background: rgba(255, 255, 255, 0.8); padding: 30px 0; border-radius: 20px;">
+      <img src="{{ asset('img/logo.png') }}"
+        style="max-width: 400px; width: 50%; border-radius: 5px; margin-bottom: 20px;">
+      <div class="masthead-subheading" style="color: #337ab7; font-size: 2vw;">Welcome to Kedai Basikal Budget & Customized</div>
+      <div class="masthead-heading text-uppercase" style="margin-bottom:30px; color:black; font-size: 3vw;">Bicycle Inventory Management System</div>
+      <div class="row" style="width: 100%; max-width: 1200px; margin: 0 auto; padding: 20px 0;">
+        <div class="col">
+          <a class="btn btn-primary btn-xl text-uppercase" href="/login"
+            style="padding: 15px 60px; font-size: 1.5vw; margin-bottom: 20px; float:right;">Login</a>
+        </div>
+        <div class="col">
+          <a class="btn btn-primary btn-xl text-uppercase" href="/register"
+            style="padding: 15px 60px; font-size: 1.5vw; margin-bottom: 20px; float:left;">Register</a>
+        </div>
+      </div>
     </div>
   </header>
 

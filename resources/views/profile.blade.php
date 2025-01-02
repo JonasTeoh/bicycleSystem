@@ -3,8 +3,8 @@
 @section('content')
   @extends('layouts.app')
   @include('layouts.sidebar')
-  <div class="container content-wrapper">
-    <div class="row justify-content-center">
+  <div class="d-flex align-items-center justify-content-center content-wrapper1">
+    <div class="row" style="width: 100%; justify-content: center;">
       <div class="col-md-8">
         <div class="card">
           <div class="card-header">Profile
@@ -68,4 +68,5 @@
       </div>
     </div>
   </div>
+
 @endsection

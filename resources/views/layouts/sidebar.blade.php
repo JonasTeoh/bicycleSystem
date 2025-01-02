@@ -5,20 +5,22 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
 <style>
-  .main-sidebar {
+  .main-sidebar1 {
     position: fixed;
-    top: 0;
+    top: 66px;
     left: 0;
     z-index: 999999999;
     transition: all 0.5s;
     height: 100%;
     width: 250px;
+    background-color: white;
   }
+
 </style>
 
-<aside class="main-sidebar elevation-4" style = "position: fixed; height: 100%;">
+<aside class="main-sidebar1 elevation-4" style = "position: fixed; height: 100%; top:66px">
   {{-- <a href="/home" style="vertical-align: middle; color:white"> --}}
-    <div style="padding-top: 9.25px; padding-left:10px; overflow: auto; background: rgba(255, 255, 255, 1)">
+    {{-- <div style="padding-top: 9.25px; padding-left:10px; overflow: auto; background: rgba(255, 255, 255, 1)">
     <a href="/home" style="text-decoration: none;">
       <img src="{{ asset('img/logo.png') }}" alt="logo"
         style="height: 40px; display:inline-block; border-radius: 5px;">
@@ -28,7 +30,7 @@
         Customized
       </h6>
     </a>
-  </div>
+  </div> --}}
   {{-- </a> --}}
 
   <!-- Sidebar -->

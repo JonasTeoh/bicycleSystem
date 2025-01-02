@@ -28,20 +28,28 @@
   <script src="https://kit.fontawesome.com/bc8e231302.js" crossorigin="anonymous"></script>
 
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+
 </head>
 
 <body>
   <div id="app" style="">
     <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm"
       style="position:fixed; width:100%; z-index:9999">
-      <div class="container">
+      <div class="container d-flex flex-row justify-content-start">
         @auth
-          <a class="navbar-brand" href="{{ url('/home') }}">
-            <img src="{{ asset('img/logo.png') }}" alt="..." style="width: 80px; height: 40px; margin-left: 10px">
+          @auth
+            <div class="js-collapse-div" id="js-collapse-div" onclick="sidebarCollapse()" style="">
+              <a href="#" style="text-decoration: none"><i class="fa fa-bars"></i></a>
+            </div>
+
+          <a class="navbar-brand" href="{{ url('/home') }}" style="margin-left: 30px">
+            <img src="{{ asset('img/logo.png') }}" alt="..." style="width: 80px; height: 40px; margin-left: 0px">
           </a>
+          @endauth
         @else
           <a class="navbar-brand" href="{{ url('/') }}">
-            <img src="{{ asset('img/logo.png') }}" alt="..." style="width: 80px; height: 40px; margin-left: 10px">
+            <img src="{{ asset('img/logo.png') }}" alt="..." style="width: 80px; height: 40px; margin-left: 0px">
           </a>
         @endauth
 
@@ -49,52 +57,36 @@
           aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
           <span class="navbar-toggler-icon"></span>
         </button> --}}
+        <ul class="navbar-nav ml-auto d-flex flex-row">
+          <!-- Authentication Links -->
+          @guest
+            <li class="nav-item mr-2"><a class="nav-link" href="{{ route('login') }}" style="font-family: verdana">{{ __('Login') }}</a></li>
+            @if (Route::has('register'))
+              <li class="nav-item"><a class="nav-link" href="{{ route('register') }}" style="font-family: verdana">{{ __('Register') }}</a></li>
+            @endif
+          @else
+            <li class="nav-item dropdown">
+              <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false" v-pre>
+                {{ Auth::user()->name }} <span class="caret"></span>
+              </a>
 
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <!-- Left Side Of Navbar -->
-          {{-- <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-              <a class="nav-link" data-widget="pushmenu" href="#" role="button" style="margin-left:170px;"><i
-                  class="fas fa-bars js-collapse"></i></a>
-            </li>
-          </ul> --}}
-
-          <!-- Right Side Of Navbar -->
-          <ul class="navbar-nav ml-auto">
-            <!-- Authentication Links -->
-            @guest
-              <li class="nav-item">
-                <a class="nav-link" href="{{ route('login') }} " style="font-family: verdana">{{ __('Login') }} </a>
-              </li>
-              @if (Route::has('register'))
-                <li class="nav-item">
-                  <a class="nav-link" href="{{ route('register') }}"
-                    style="font-family: verdana">{{ __('Register') }}</a>
-                </li>
-              @endif
-            @else
-              <li class="nav-item dropdown">
-                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
-                  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                  {{ Auth::user()->name }} <span class="caret"></span>
+              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                <form id="logout-form" method="POST" action="/logout" style="display: none;">
+                  @csrf
+                </form>
+                <a class="dropdown-item" href="/profile">
+                  {{ __('Profile') }}
                 </a>
+                <a class="dropdown-item" href="#"
+                  onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                  {{ __('Logout') }}
+                </a>
+              </div>
+            </li>
+          @endguest
+        </ul>
 
-                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                  <form id="logout-form" method="POST" action="/logout" style="display: none;">
-                    @csrf
-                  </form>
-                  <a class="dropdown-item" href="/profile">
-                    {{ __('Profile') }}
-                  </a>
-                  <a class="dropdown-item" href="#"
-                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                    {{ __('Logout') }}
-                  </a>
-                </div>
-              </li>
-            @endguest
-          </ul>
-        </div>
       </div>
     </nav>
     <div style="padding-top: 80px"></div>
@@ -117,93 +109,40 @@
         isExpandElementsAdded = false;
       }
     }
-  </script>
-
-  <style>
-    body {
-      padding-right: 50px;
-    }
-
-    .sidebar-collapse {
-      position: fixed;
-      left: -250px;
-      transition: all 0.5s;
-      width: 250px;
-      height: 100%;
-      z-index: 999999999;
-    }
-
-
-    .content-wrapper {
-      position: relative !important;
-      left: 2px !important;
-      width: 85%;
-      transition: all 0.5s !important;
-      /* Explicitly transitioning 'left' */
-    }
-
-    .content-wrapper.move {
-      left: -200 !important;
-      width: 100% !important;
-    }
-  </style>
-
-  <script>
-    var isSidebarCollapse = false;
 
     function sidebarCollapse() {
-      const element = document.querySelector('.content-wrapper');
-      // Force a reflow before adding the class to ensure the transition is applied
-      element.offsetHeight; // Trigger a reflow
-      element.classList.toggle('move');
-      if (isSidebarCollapse === false) {
-        $(document).ready(function() {
-          document.querySelector('.main-sidebar').classList.add('sidebar-collapse');
-          document.querySelector('.js-collapse-div').classList.add('js-collapse');
-          // document.querySelector('.js-main-wrapper').classList.add('js-main-wrapper-extend');
-          // document.querySelector('#js-collapse').style.left = "-250px";
-          isSidebarCollapse = true;
-        });
-
+      const sidebar = document.querySelector(".main-sidebar1");
+      if (sidebar.style.left === "0px") {
+        sidebar.style.transition = "left 0.5s ease";
+        sidebar.style.left = "-255px";
+        document.querySelector(".content-wrapper1").style.transition = "margin 0.5s ease";
+        document.querySelector(".content-wrapper1").style.marginLeft = "0";
       } else {
-        $(document).ready(function() {
-          document.querySelector('.main-sidebar').classList.remove('sidebar-collapse');
-          document.querySelector('.js-collapse-div').classList.remove('js-collapse');
-          // document.querySelector('.js-main-wrapper-extend').classList.remove('js-main-wrapper-extend');
-          // document.querySelector('#js-collapse').style.left = "0";
-          isSidebarCollapse = false;
-        });
-
+        sidebar.style.transition = "left 0.5s ease";
+        document.querySelector(".content-wrapper1").style.transition = "margin 0.5s ease";
+        sidebar.style.left = "0px";
+        document.querySelector(".content-wrapper1").style.marginLeft = "255px";
       }
     }
+
+    const mediaQuery = window.matchMedia("(max-width: 991px)");
+
+    function handleMediaQueryChange(e) {
+      if (e.matches) {
+        document.querySelector(".main-sidebar1").style.transition = "left 0.5s ease";
+        document.querySelector(".main-sidebar1").style.left = "-255px";
+        document.querySelector(".content-wrapper1").style.transition = "margin 0.5s ease";
+        document.querySelector(".content-wrapper1").style.marginLeft = "0";
+      } else {
+        document.querySelector(".main-sidebar1").style.transition = "left 0.5s ease";
+        document.querySelector(".main-sidebar1").style.left = "0px";
+        document.querySelector(".content-wrapper1").style.transition = "margin 0.5s ease";
+        document.querySelector(".content-wrapper1").style.marginLeft = "255px";
+      }
+    }
+    mediaQuery.addListener(handleMediaQueryChange);
+    handleMediaQueryChange(mediaQuery);
   </script>
-
-  <style>
-    .js-collapse-div {
-      position: fixed;
-      top: 28;
-      left: 280;
-      z-index: 999999999;
-      transition: all 0.5s;
-    }
-
-    .js-collapse {
-      position: fixed;
-      top: 28;
-      left: 20;
-      cursor: pointer;
-      z-index: 999999999;
-      transition: all 0.5s;
-      width: 40px;
-      height: 40px;
-    }
-  </style>
-
-  @auth
-    <div class="js-collapse-div" id="js-collapse-div" onclick="sidebarCollapse()" style="">
-      <a href="#" style="text-decoration: none"><i class="fa fa-bars"></i></a>
-    </div>
-  @endauth
 
 </body>
 

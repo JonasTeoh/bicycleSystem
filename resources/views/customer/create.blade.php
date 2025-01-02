@@ -11,7 +11,7 @@
 
 
   <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper" style="height: 100px;">
+  <div class="content-wrapper1" style="height: 100px;">
     <!-- Content Header (Page header) -->
     <div class="content-header">
       <div class="container-fluid">
