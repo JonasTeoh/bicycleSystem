@@ -6,6 +6,10 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Log;
+use IcehouseVentures\LaravelChartjs\Facades\Chartjs;
+use Carbon\Carbon;
+use Carbon\CarbonPeriod;
+use Illuminate\Support\Collection;
 
 
 class UserController extends Controller
@@ -149,13 +153,13 @@ class UserController extends Controller
   public function updateProfile(Request $request, $id)
   {
     if (auth()->user()->id == $id) {
-      Log::info('haloddd'.auth()->user()->id.$id);
+      Log::info('haloddd' . auth()->user()->id . $id);
       $input = $request->validate([
         'name' => ['required'],
         'password' => 'required|confirmed|min:8|max:200'
         // 'password_confirmation' => ['required', 'min:8', 'max: 200']
       ]);
-      Log::info('middle'.auth()->user()->id.$id);
+      Log::info('middle' . auth()->user()->id . $id);
       $user = User::find($id);
       $input['password'] = bcrypt($input['password']);
       Log::info("User " . auth()->user()->name . " (id: " . auth()->user()->id . ") updated user " . $user->name . " (id: " . $user->id . ")");
@@ -163,8 +167,10 @@ class UserController extends Controller
       $user->update($input);
       session()->flash('success', 'Profile updated!');
 
-      Log::info('final'.auth()->user()->id.$id);
+      Log::info('final' . auth()->user()->id . $id);
       return redirect('/profile');
     }
   }
+
 }
+

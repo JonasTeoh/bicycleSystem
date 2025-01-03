@@ -149,6 +149,7 @@ class ComposerStaticInit933c5106a960b1b83fe8013eaa73ec86
         array (
             'Illuminate\\Support\\' => 19,
             'Illuminate\\' => 11,
+            'IcehouseVentures\\LaravelChartjs\\' => 32,
         ),
         'G' => 
         array (
@@ -493,6 +494,10 @@ class ComposerStaticInit933c5106a960b1b83fe8013eaa73ec86
         'Illuminate\\' => 
         array (
             0 => __DIR__ . '/..' . '/laravel/framework/src/Illuminate',
+        ),
+        'IcehouseVentures\\LaravelChartjs\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/icehouse-ventures/laravel-chartjs/src',
         ),
         'GuzzleHttp\\UriTemplate\\' => 
         array (
@@ -1987,6 +1992,11 @@ class ComposerStaticInit933c5106a960b1b83fe8013eaa73ec86
         'Hamcrest\\Type\\IsString' => __DIR__ . '/..' . '/hamcrest/hamcrest-php/hamcrest/Hamcrest/Type/IsString.php',
         'Hamcrest\\Util' => __DIR__ . '/..' . '/hamcrest/hamcrest-php/hamcrest/Hamcrest/Util.php',
         'Hamcrest\\Xml\\HasXPath' => __DIR__ . '/..' . '/hamcrest/hamcrest-php/hamcrest/Hamcrest/Xml/HasXPath.php',
+        'IcehouseVentures\\LaravelChartjs\\Builder' => __DIR__ . '/..' . '/icehouse-ventures/laravel-chartjs/src/Builder.php',
+        'IcehouseVentures\\LaravelChartjs\\Facades\\Chartjs' => __DIR__ . '/..' . '/icehouse-ventures/laravel-chartjs/src/Facades/Chartjs.php',
+        'IcehouseVentures\\LaravelChartjs\\Providers\\ChartjsServiceProvider' => __DIR__ . '/..' . '/icehouse-ventures/laravel-chartjs/src/Providers/ChartjsServiceProvider.php',
+        'IcehouseVentures\\LaravelChartjs\\Support\\Config' => __DIR__ . '/..' . '/icehouse-ventures/laravel-chartjs/src/Support/Config.php',
+        'IcehouseVentures\\LaravelChartjs\\View\\Components\\ChartjsComponent' => __DIR__ . '/..' . '/icehouse-ventures/laravel-chartjs/src/View/Components/ChartjsComponent.php',
         'Illuminate\\Auth\\Access\\AuthorizationException' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Auth/Access/AuthorizationException.php',
         'Illuminate\\Auth\\Access\\Events\\GateEvaluated' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Auth/Access/Events/GateEvaluated.php',
         'Illuminate\\Auth\\Access\\Gate' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Auth/Access/Gate.php',

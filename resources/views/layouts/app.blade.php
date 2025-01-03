@@ -28,7 +28,8 @@
   <script src="https://kit.fontawesome.com/bc8e231302.js" crossorigin="anonymous"></script>
 
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-
+  {{-- for chart js --}}
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 </head>
 

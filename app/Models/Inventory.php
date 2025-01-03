@@ -12,13 +12,15 @@ class Inventory extends Model
     'name',
     'quantity',
     'age_category',
-    'price'
+    'price',
+    'photo'
   ];
 
   public $sortable = [
     'name',
     'quantity',
     'age_category',
-    'price'
+    'price',
+    'photo'
   ];
 }

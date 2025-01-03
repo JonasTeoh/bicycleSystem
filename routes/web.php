@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ChartController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\InventoryController;
@@ -9,6 +10,8 @@ use App\Http\Controllers\SupplyRecordController;
 use App\Http\Controllers\PurchaseRecordController;
 use App\Http\Middleware\EnsureUserIsAuthenticated;
 use App\Http\Controllers\RoleAndPermissionController;
+
+Route::get('/user/chart', [UserController::class, 'showChart']);
 
 Route::get('/', function () {
   if (auth()->check()) {
@@ -32,9 +35,7 @@ Route::get('/register', function () {
 })->name('register');
 
 Route::middleware('auth')->group(function () {
-  Route::get('/home', function () {
-    return view('home');
-  })->name('home');
+  Route::get('/home', [ChartController::class, 'showChart'])->name('home');
   Route::resource('/customer', CustomerController::class)->middleware('permission:customer-list');
   Route::resource('/inventory', InventoryController::class)->middleware('permission:inventory-list');
   Route::resource('/purchaseRecord', PurchaseRecordController::class)->middleware('permission:purchaseRecord-list');

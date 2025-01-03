@@ -35,8 +35,40 @@
         </div>
         <div class="card-body">
 
-          <form action="{{ url('inventory') }}" method="post">
+          <form action="{{ url('inventory') }}" method="post" enctype="multipart/form-data">
             {!! csrf_field() !!}
+            <label>Item Photo</label><br>
+            <div class="input-group">
+              <div class="custom-file">
+                <input type="file" class="custom-file-input" name="photo" id="photo" accept="image/*" onchange="displayImage(this)">
+                <label class="custom-file-label" for="photo" id="photo-label">Choose file</label>
+              </div>
+            </div>
+            <script>
+              // Add the following code above the </body> tag.
+              document.getElementById("photo").addEventListener("change", function() {
+                var fileName = document.getElementById("photo").files[0].name;
+                document.getElementById("photo-label").innerText = fileName;
+              });
+            </script>
+            <div style="display: flex; justify-content: flex-start; align-items: center; margin-top: 10px;">
+              <img src="" id="item_photo" style="max-width: 100%; max-height: 200px; display: none;">
+            </div>
+            <br>
+
+            <script>
+              function displayImage(input) {
+                if (input.files && input.files[0]) {
+                  var reader = new FileReader();
+                  reader.onload = function(e) {
+                    $('#item_photo').attr('src', e.target.result);
+                  }
+                  reader.readAsDataURL(input.files[0]);
+                  $('#item_photo').show();
+                }
+              }
+            </script>
+
             <label>Name</label><br>
             <input type="text" required name="name" id="name" class="form-control"><br>
 

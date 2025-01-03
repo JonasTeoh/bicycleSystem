@@ -36,6 +36,8 @@
         <div class="card-body">
 
           <div class="card-body">
+            <h5 class="card-text">Photo:</h5>
+            <img src="{{ asset('img/' . $inventory->photo) }}" alt="photo" width="200" class="img-thumbnail" style="border-radius: 5px;">
             <h5 class="card-text">Name: {{ $inventory->name }}</h5>
             <h5 class="card-text">Quantity: {{ $inventory->quantity }}</h5>
             <h5 class="card-text">Age Category: {{ $inventory->age_category }}</h5>

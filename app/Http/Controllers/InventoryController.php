@@ -25,6 +25,12 @@ class InventoryController extends Controller
   public function store(Request $request)
   {
     $input = $request->all();
+    if ($request->hasFile('photo')) {
+      $file = $request->file('photo');
+      $filename = date('YmdHis') . '_' . $file->getClientOriginalName();
+      $file->move(public_path('img'), $filename);
+      $input['photo'] = $filename;
+    }
     Inventory::create($input);
     session()->flash('success', 'Added a new item!');
     return redirect('inventory');
@@ -47,6 +53,12 @@ class InventoryController extends Controller
   {
     $input = $request->all();
     $inventory = Inventory::find($id);
+    if ($request->hasFile('photo')) {
+      $file = $request->file('photo');
+      $filename = date('YmdHis') . '_' . $file->getClientOriginalName();
+      $file->move(public_path('img'), $filename);
+      $input['photo'] = $filename;
+    }
     $inventory->update($input);
     session()->flash('success', 'Inventory updated!');
     return redirect('inventory');

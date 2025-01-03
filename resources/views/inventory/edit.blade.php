@@ -43,9 +43,30 @@
           <p class="card-text">Price: RM{{ $inventory->price }}</p>
           <hr>
 
-          <form method="POST" action="{{ url('/inventory/'.$inventory->id) }}" >
+          <form method="POST" action="{{ url('/inventory/'.$inventory->id) }}" enctype="multipart/form-data">
             @csrf
-
+            <label>Item Photo</label><br>
+            <div class="input-group">
+              <div class="custom-file">
+                <input type="file" class="custom-file-input" name="photo" id="photo" accept="image/*" onchange="displayImage(this)">
+                <label class="custom-file-label" for="photo" id="photo-label">{{ $inventory->photo }}</label>
+              </div>
+            </div>
+            <div style="display: flex; justify-content: flex-start; align-items: center; margin-top: 10px;">
+              <img src="{{ asset('img/'.$inventory->photo) }}" id="item_photo" style="max-width: 100%; max-height: 200px; display: block; margin-bottom: 10px;">
+            </div>
+            <script>
+              function displayImage(input) {
+                var file = input.files[0];
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                  $('#item_photo').attr('src', e.target.result);
+                  $('#photo-label').text(file.name);
+                }
+                reader.readAsDataURL(file);
+              }
+            </script>
+            <br>
             <input type="hidden" name="id" value="{{ $inventory->id }}">
             <label>Name</label><br>
             <input type="text" name="name" id="name" class="form-control" value="{{ $inventory->name }}"><br>

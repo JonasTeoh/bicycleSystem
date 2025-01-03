@@ -69,18 +69,15 @@
     <!-- Sidebar Menu -->
     <nav class="mt-2">
       <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-        <!-- Add icons to the links using the .nav-icon class
-             with font-awesome or any other icon font library -->
-
         <li class="nav-item">
-          <a href="{{ url('/home') }}" class="nav-link">
+          <a href="{{ url('/home') }}" class="nav-link {{ request()->is('home') ? 'text-primary' : '' }}">
             <i class="nav-icon fas fa-tachometer-alt"></i>
             <p>Dashboard</p>
           </a>
         </li>
         @can(['user-list', 'role-list'])
           <li class="nav-item roles-permission">
-            <a href="#" class="nav-link" onclick="openMenuRolesPermission();">
+            <a href="#" class="nav-link" style="color: #6C757D; transition: color 0.2s ease-in-out;" onclick="openMenuRolesPermission();" onmouseover="this.style.color='#0A58CA'" onmouseout="this.style.color='#6C757D'">
               <i class="nav-icon fa-solid fa-key"></i>
               <p>
                 Roles/Permission
@@ -89,37 +86,24 @@
               </p>
             </a>
             <ul class="nav nav-treeview" style="height: 90px">
-              {{-- @can('user-list') --}}
-              <li class="nav-item" style = "position:relative; left:15px;">
-                <a href="{{ url('/user') }}" class="nav-link">
+              <li class="nav-item" style="position:relative; left:15px;">
+                <a href="{{ url('/user') }}" class="nav-link {{ request()->is('user') ? 'text-primary' : '' }}">
                   <i class="nav-icon fa-solid fa-user"></i>
                   <p>Users</p>
                 </a>
               </li>
-              {{-- @endcan --}}
-              {{-- @can('role-list') --}}
-              <li class="nav-item" style = "position:relative; left:15px;">
-                <a href="{{ url('/roleAndPermission') }}" class="nav-link">
+              <li class="nav-item" style="position:relative; left:15px;">
+                <a href="{{ url('/roleAndPermission') }}" class="nav-link {{ request()->is('roleAndPermission') ? 'text-primary' : '' }}">
                   <i class="nav-icon fa-solid fa-address-card"></i>
                   <p>Roles</p>
                 </a>
               </li>
-              {{-- @endcan --}}
-              {{-- @can('permission-list') --}}
-              {{-- <li class="nav-item" style = "position:relative; left:15px;">
-              <a href="{{ url('/permissions') }}" class="nav-link">
-                <i class="nav-icon fa-solid fa-fingerprint"></i>
-                <p>Permission</p>
-              </a>
-              <br>
-              </li> --}}
-              {{-- @endcan --}}
             </ul>
           </li>
         @endcan
         @can('customer-list')
         <li class="nav-item">
-          <a href="{{ url('/customer') }}" class="nav-link">
+          <a href="{{ url('/customer') }}" class="nav-link {{ request()->is('customer') ? 'text-primary' : '' }}">
             <i class="nav-icon fa-solid bi bi-people-fill"></i>
             <p>Customer Info</p>
           </a>
@@ -127,17 +111,15 @@
         @endcan
         @can('inventory-list')
         <li class="nav-item">
-          <a href="{{ url('/inventory') }}" class="nav-link">
+          <a href="{{ url('/inventory') }}" class="nav-link {{ request()->is('inventory') ? 'text-primary' : '' }}">
             <i class="nav-icon fa-solid bi-bicycle"></i>
-            <p>
-              Inventory
-            </p>
+            <p>Inventory</p>
           </a>
         </li>
         @endcan
         @can('purchaseRecord-list')
         <li class="nav-item">
-          <a href="{{ url('/purchaseRecord') }}" class="nav-link">
+          <a href="{{ url('/purchaseRecord') }}" class="nav-link {{ request()->is('purchaseRecord') ? 'text-primary' : '' }}">
             <i class="nav-icon fa-solid bi bi-bag-check-fill"></i>
             <p>Purchase Records</p>
           </a>
@@ -145,25 +127,21 @@
         @endcan
         @can('supplyRecord-list')
         <li class="nav-item">
-          <a href="{{ url('/supplyRecord') }}" class="nav-link">
+          <a href="{{ url('/supplyRecord') }}" class="nav-link {{ request()->is('supplyRecord') ? 'text-primary' : '' }}">
             <i class="nav-icon fa-solid fa-book"></i>
-            <p>
-              Supply Records
-            </p>
+            <p>Supply Records</p>
           </a>
         </li>
         @endcan
         @can('supplier-list')
         <li class="nav-item">
-          <a href="{{ url('/supplier') }}" class="nav-link">
+          <a href="{{ url('/supplier') }}" class="nav-link {{ request()->is('supplier') ? 'text-primary' : '' }}">
             <i class="nav-icon fa-solid bi bi-box-seam"></i>
             <p>Supplier</p>
           </a>
         </li>
         @endcan
-
       </ul>
-
     </nav>
 
     <!-- /.sidebar-menu -->
@@ -184,4 +162,10 @@
       isMenuRolesPermissionAdded = false;
     }
   }
+
+  const currentPageIsUserOrRoleAndPermission = window.location.href.includes("user") || window.location.href.includes("roleAndPermission");
+  if (currentPageIsUserOrRoleAndPermission) {
+    openMenuRolesPermission();
+  }
+
 </script>

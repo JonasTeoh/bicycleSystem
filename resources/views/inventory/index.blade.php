@@ -65,6 +65,7 @@
                   <thead>
                     <tr>
                       <th>ID</th>
+                      <th>Image</th>
                       <th>Name</th>
                       <th>Quantity</th>
                       <th>Age Category</th>
@@ -77,6 +78,7 @@
                     @foreach ($inventory as $item)
                       <tr>
                         <td>{{ $item->id }}</td>
+                        <td><img src="{{ asset('img/' . $item->photo) }}" style="max-width: 80px; max-height: 80px; border-radius: 5px;" /></td>
                         <td>{{ $item->name }}</td>
                         <td>{{ $item->quantity }}</td>
                         <td>{{ $item->age_category }}</td>
