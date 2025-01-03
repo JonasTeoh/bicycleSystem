@@ -40,14 +40,14 @@
         style="max-width: 400px; width: 50%; border-radius: 5px; margin-bottom: 20px;">
       <div class="masthead-subheading" style="color: #337ab7; font-size: 2vw;">Welcome to Kedai Basikal Budget & Customized</div>
       <div class="masthead-heading text-uppercase" style="margin-bottom:30px; color:black; font-size: 3vw;">Bicycle Inventory Management System</div>
-      <div class="row" style="width: 100%; max-width: 1200px; margin: 0 auto; padding: 20px 0;">
-        <div class="col">
+      <div class="row justify-content-center" style="width: 100%; max-width: 1200px; margin: 0 auto; padding: 20px 0;">
+        <div class="col-auto">
           <a class="btn btn-primary btn-xl text-uppercase" href="/login"
-            style="padding: 15px 60px; font-size: 1.5vw; margin-bottom: 20px; float:right;">Login</a>
+            style="padding: 15px 60px; font-size: 1.5vw; margin-bottom: 20px;">Login</a>
         </div>
-        <div class="col">
+        <div class="col-auto">
           <a class="btn btn-primary btn-xl text-uppercase" href="/register"
-            style="padding: 15px 60px; font-size: 1.5vw; margin-bottom: 20px; float:left;">Register</a>
+            style="padding: 15px 60px; font-size: 1.5vw; margin-bottom: 20px;">Register</a>
         </div>
       </div>
     </div>

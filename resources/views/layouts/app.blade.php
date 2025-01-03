@@ -40,13 +40,13 @@
       <div class="container d-flex flex-row justify-content-start">
         @auth
           @auth
-            <div class="js-collapse-div" id="js-collapse-div" onclick="sidebarCollapse()" style="">
+            <div class="js-collapse-div" id="js-collapse-div" onclick="sidebarCollapse()" style="margin-left: 10px;">
               <a href="#" style="text-decoration: none"><i class="fa fa-bars"></i></a>
             </div>
 
-          <a class="navbar-brand" href="{{ url('/home') }}" style="margin-left: 30px">
-            <img src="{{ asset('img/logo.png') }}" alt="..." style="width: 80px; height: 40px; margin-left: 0px">
-          </a>
+            <a class="navbar-brand" href="{{ url('/home') }}" style="margin-left: 30px">
+              <img src="{{ asset('img/logo.png') }}" alt="..." style="width: 80px; height: 40px; margin-left: 0px">
+            </a>
           @endauth
         @else
           <a class="navbar-brand" href="{{ url('/') }}">
@@ -61,18 +61,20 @@
         <ul class="navbar-nav ml-auto d-flex flex-row">
           <!-- Authentication Links -->
           @guest
-            <li class="nav-item mr-2"><a class="nav-link" href="{{ route('login') }}" style="font-family: verdana">{{ __('Login') }}</a></li>
+            <li class="nav-item mr-2"><a class="nav-link" href="{{ route('login') }}"
+                style="font-family: verdana">{{ __('Login') }}</a></li>
             @if (Route::has('register'))
-              <li class="nav-item"><a class="nav-link" href="{{ route('register') }}" style="font-family: verdana">{{ __('Register') }}</a></li>
+              <li class="nav-item"><a class="nav-link" href="{{ route('register') }}"
+                  style="font-family: verdana">{{ __('Register') }}</a></li>
             @endif
           @else
             <li class="nav-item dropdown">
               <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
-                aria-haspopup="true" aria-expanded="false" v-pre>
+                aria-haspopup="true" aria-expanded="false" v-pre style="margin-right: 15px;">
                 {{ Auth::user()->name }} <span class="caret"></span>
               </a>
 
-              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown" style="position: absolute; right: 0;">
                 <form id="logout-form" method="POST" action="/logout" style="display: none;">
                   @csrf
                 </form>

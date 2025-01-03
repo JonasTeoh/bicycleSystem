@@ -60,7 +60,7 @@
             <select class="form-control" required name="role">
               <option value="">Select Item</option>
               @foreach ($roles as $roleId => $roleName)
-                <option value="{{ $roleId }}">{{ $roleId }} - {{ $roleName }}</option>
+                <option value="{{ $roleName }}">{{ $roleId }} - {{ $roleName }}</option>
               @endforeach
             </select><br>
 
